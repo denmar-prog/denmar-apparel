@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,111 +7,143 @@
     <title>DENMAR APPAREL</title>
 
     <style>
-    
-<style>
-    * {
-        box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #f1f5f9;
-        margin: 0;
-        padding: 20px;
-        color: #1e293b;
-    }
-
-    header {
-        background: #172554;
-        color: white;
-        text-align: center;
-        padding: 30px 20px;
-        border-radius: 14px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-        margin: 0;
-        font-size: 26px;
-    }
-
-    .container {
-        background: white;
-        padding: 25px;
-        margin-top: 20px;
-        border-radius: 14px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-    }
-
-    input, select, button {
-        padding: 12px;
-        margin: 6px 0;
-        width: 100%;
-        box-sizing: border-box;
-        border-radius: 7px;
-        font-size: 14px;
-    }
-
-    input, select {
-        border: 1px solid #cbd5e1;
-        outline: none;
-    }
-
-    input:focus, select:focus {
-        border-color: #2563eb;
-    }
-
-    button {
-        background: #1d4ed8;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        background: #1e40af;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background: white;
-    }
-
-    th, td {
-        padding: 13px;
-        border-bottom: 1px solid #e2e8f0;
-        text-align: left;
-    }
-
-    th {
-        background: #172554;
-        color: white;
-    }
-
-    tr:hover {
-        background: #f8fafc;
-    }
-
-    @media (max-width: 600px) {
         body {
-            padding: 10px;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+            color: #1e293b;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
         }
 
         .container {
-            padding: 15px;
-            overflow-x: auto;
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        input, select, button {
+            padding: 12px;
+            margin: 6px 0;
+            width: 100%;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        input, select {
+            border: 1px solid #cbd5e1;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            background: #1d4ed8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        .logout {
+            background: #dc2626;
+        }
+
+        .logout:hover {
+            background: #b91c1c;
+        }
+
+        .admin-button {
+            max-width: 200px;
+            margin-top: 15px;
+        }
+
+        .action-button {
+            width: auto;
+            padding: 8px 12px;
+            margin: 3px;
+        }
+
+        .delete-button {
+            background: #dc2626;
+        }
+
+        .delete-button:hover {
+            background: #b91c1c;
         }
 
         table {
-            min-width: 550px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
         }
-    }
-</style>
-    
+
+        th, td {
+            padding: 13px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #172554;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 550px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -118,12 +151,28 @@
 <header>
     <h1>DENMAR APPAREL</h1>
     <p>Clothing Inventory Management System</p>
+
+    <button id="loginButton"
+            class="admin-button"
+            onclick="adminLogin()">
+        Admin Login
+    </button>
+
+    <button id="logoutButton"
+            class="admin-button logout"
+            onclick="adminLogout()"
+            hidden>
+        Admin Logout
+    </button>
+
+    <p id="status" class="status">Visitor Mode</p>
 </header>
 
-<div class="container">
+<div class="container" id="adminPanel" hidden>
     <h2>Add New Product</h2>
 
-    <input type="text" id="productName" placeholder="Product Name">
+    <input type="text" id="productName"
+           placeholder="Product Name">
 
     <select id="productSize">
         <option value="">Select Size</option>
@@ -133,9 +182,11 @@
         <option>XL</option>
     </select>
 
-    <input type="number" id="productPrice" placeholder="Price" min="0">
+    <input type="number" id="productPrice"
+           placeholder="Price" min="0">
 
-    <input type="number" id="productStock" placeholder="Quantity" min="0">
+    <input type="number" id="productStock"
+           placeholder="Quantity" min="0">
 
     <button onclick="addProduct()">Add Product</button>
 </div>
@@ -147,21 +198,26 @@
         <thead>
             <tr>
                 <th>Product</th>
-<th>Size</th>
-<th>Price</th>
-<th>Stock</th>
-<th>Action</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th id="actionHeader" hidden>Action</th>
             </tr>
         </thead>
 
-        <tbody id="productList">
-        </tbody>
+        <tbody id="productList"></tbody>
     </table>
 </div>
 
 <script>
 
+// DEMO PASSWORD
+// Palitan ito ng sarili mong password.
+const ADMIN_PASSWORD = "UrbanAdmin123!";
 
+let adminLoggedIn = false;
+
+// LOAD PRODUCTS
 const savedProducts = localStorage.getItem("products");
 
 let products = savedProducts ? JSON.parse(savedProducts) : [
@@ -174,15 +230,67 @@ let products = savedProducts ? JSON.parse(savedProducts) : [
     { name: "Jogger Pants", size: "Medium", price: 550, stock: 14 },
     { name: "Basic Cotton Shirt", size: "Small", price: 250, stock: 30 }
 ];
-    
+
 function saveProducts() {
     localStorage.setItem("products", JSON.stringify(products));
 }
-    if (!savedProducts) {
-    saveProducts();
-    }
 
+if (!savedProducts) {
+    saveProducts();
+}
+
+// ADMIN LOGIN
+function adminLogin() {
+    let password = prompt("Enter Admin Password:");
+
+    if (password === null) return;
+
+    if (password === ADMIN_PASSWORD) {
+        adminLoggedIn = true;
+        updateAdminView();
+        alert("Admin Login Successful!");
+    } else {
+        alert("Incorrect Password!");
+    }
+}
+
+// ADMIN LOGOUT
+function adminLogout() {
+    adminLoggedIn = false;
+    updateAdminView();
+    alert("You are now in Visitor Mode.");
+}
+
+// UPDATE VIEW
+function updateAdminView() {
+    document.getElementById("adminPanel").hidden = !adminLoggedIn;
+    document.getElementById("loginButton").hidden = adminLoggedIn;
+    document.getElementById("logoutButton").hidden = !adminLoggedIn;
+    document.getElementById("actionHeader").hidden = !adminLoggedIn;
+
+    document.getElementById("status").textContent =
+        adminLoggedIn ? "Admin Mode" : "Visitor Mode";
+
+    displayProducts();
+}
+
+// ESCAPE PRODUCT TEXT
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[char];
+    });
+}
+
+// ADD PRODUCT
 function addProduct() {
+    if (!adminLoggedIn) return;
+
     let name = document.getElementById("productName").value.trim();
     let size = document.getElementById("productSize").value;
     let price = document.getElementById("productPrice").value;
@@ -193,11 +301,16 @@ function addProduct() {
         return;
     }
 
+    if (Number(price) < 0 || Number(stock) < 0) {
+        alert("Price and quantity cannot be negative!");
+        return;
+    }
+
     products.push({
         name: name,
         size: size,
-        price: price,
-        stock: stock
+        price: Number(price),
+        stock: Number(stock)
     });
 
     saveProducts();
@@ -207,41 +320,63 @@ function addProduct() {
     document.getElementById("productSize").value = "";
     document.getElementById("productPrice").value = "";
     document.getElementById("productStock").value = "";
+
+    alert("Product added successfully!");
 }
 
-
+// DISPLAY PRODUCTS
 function displayProducts() {
     let list = document.getElementById("productList");
 
     list.innerHTML = "";
 
     products.forEach(function(product, index) {
+        let action = "";
+
+        if (adminLoggedIn) {
+            action = `
+                <td>
+                    <button class="action-button"
+                        onclick="editProduct(${index})">
+                        Edit
+                    </button>
+
+                    <button class="action-button delete-button"
+                        onclick="deleteProduct(${index})">
+                        Delete
+                    </button>
+                </td>
+            `;
+        }
+
         list.innerHTML += `
             <tr>
-                <td>${product.name}</td>
-                <td>${product.size}</td>
-                <td>₱${product.price}</td>
-                <td>${product.stock}</td>
-                <td>
-                    <button onclick="editProduct(${index})">Edit</button>
-                    <button onclick="deleteProduct(${index})">Delete</button>
-                </td>
+                <td>${escapeHTML(product.name)}</td>
+                <td>${escapeHTML(product.size)}</td>
+                <td>₱${Number(product.price).toLocaleString()}</td>
+                <td>${Number(product.stock)}</td>
+                ${action}
             </tr>
         `;
     });
 }
 
-displayProducts();
-    
+// DELETE PRODUCT
 function deleteProduct(index) {
+    if (!adminLoggedIn) return;
+
     if (confirm("Are you sure you want to delete this product?")) {
         products.splice(index, 1);
         saveProducts();
         displayProducts();
+        alert("Product deleted successfully!");
     }
 }
 
+// EDIT PRODUCT
 function editProduct(index) {
+    if (!adminLoggedIn) return;
+
     let product = products[index];
 
     let newName = prompt("Enter new product name:", product.name);
@@ -256,18 +391,32 @@ function editProduct(index) {
     let newStock = prompt("Enter new quantity:", product.stock);
     if (newStock === null || newStock.trim() === "") return;
 
+    if (
+        !Number.isFinite(Number(newPrice)) ||
+        !Number.isFinite(Number(newStock)) ||
+        Number(newPrice) < 0 ||
+        Number(newStock) < 0
+    ) {
+        alert("Please enter valid numbers!");
+        return;
+    }
+
     product.name = newName.trim();
     product.size = newSize;
-    product.price = newPrice;
-    product.stock = newStock;
+    product.price = Number(newPrice);
+    product.stock = Number(newStock);
 
     saveProducts();
     displayProducts();
-    }
 
+    alert("Product updated successfully!");
+}
+
+// INITIAL DISPLAY
+updateAdminView();
 
 </script>
 
 </body>
-                          </html>
+    </html>
     
