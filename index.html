@@ -108,7 +108,58 @@
 </div>
 
 <script>
-    let products = [];
+    
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+function saveProducts() {
+    localStorage.setItem("products", JSON.stringify(products));
+}
+
+function addProduct() {
+    let name = document.getElementById("productName").value;
+    let size = document.getElementById("productSize").value;
+    let price = document.getElementById("productPrice").value;
+    let stock = document.getElementById("productStock").value;
+
+    if (name === "" || size === "" || price === "" || stock === "") {
+        alert("Please fill in all fields!");
+        return;
+    }
+
+    products.push({
+        name: name,
+        size: size,
+        price: price,
+        stock: stock
+    });
+
+    saveProducts();
+    displayProducts();
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productSize").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productStock").value = "";
+}
+
+function displayProducts() {
+    let list = document.getElementById("productList");
+    list.innerHTML = "";
+
+    products.forEach(function(product) {
+        list.innerHTML += `
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.size}</td>
+                <td>₱${product.price}</td>
+                <td>${product.stock}</td>
+            </tr>
+        `;
+    });
+}
+
+displayProducts();
+                         
 
     function addProduct() {
         let name = document.getElementById("productName").value;
