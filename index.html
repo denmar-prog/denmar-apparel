@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DENMAR APPAREL</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>DENMAR APPAREL</h1>
+    <p>Clothing Inventory Management System</p>
+</header>
+
+<div class="container">
+    <h2>Add New Product</h2>
+
+    <input type="text" id="productName" placeholder="Product Name">
+
+    <select id="productSize">
+        <option value="">Select Size</option>
+        <option>Small</option>
+        <option>Medium</option>
+        <option>Large</option>
+        <option>XL</option>
+    </select>
+
+    <input type="number" id="productPrice" placeholder="Price">
+
+    <input type="number" id="productStock" placeholder="Quantity">
+
+    <button onclick="addProduct()">Add Product</button>
+</div>
+
+<div class="container">
+    <h2>Product Inventory</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+
+        <tbody id="productList">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    let products = [];
+
+    function addProduct() {
+        let name = document.getElementById("productName").value;
+        let size = document.getElementById("productSize").value;
+        let price = document.getElementById("productPrice").value;
+        let stock = document.getElementById("productStock").value;
+
+        if (name === "" || size === "" || price === "" || stock === "") {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        products.push({
+            name: name,
+            size: size,
+            price: price,
+            stock: stock
+        });
+
+        displayProducts();
+
+        document.getElementById("productName").value = "";
+        document.getElementById("productSize").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productStock").value = "";
+    }
+
+    function displayProducts() {
+        let list = document.getElementById("productList");
+
+        list.innerHTML = "";
+
+        products.forEach(function(product) {
+            list.innerHTML += `
+                <tr>
+                    <td>${product.name}</td>
+                    <td>${product.size}</td>
+                    <td>₱${product.price}</td>
+                    <td>${product.stock}</td>
+                </tr>
+            `;
+        });
+    }
+</script>
+
+</body>
+  </html>
+      
