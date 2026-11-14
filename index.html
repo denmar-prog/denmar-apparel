@@ -161,11 +161,26 @@
 
 <script>
 
-let products = JSON.parse(localStorage.getItem("products")) || [];
 
+const savedProducts = localStorage.getItem("products");
+
+let products = savedProducts ? JSON.parse(savedProducts) : [
+    { name: "Urban Oversized Tee", size: "Large", price: 350, stock: 20 },
+    { name: "Classic Polo Shirt", size: "Medium", price: 450, stock: 15 },
+    { name: "Streetwear Hoodie", size: "XL", price: 850, stock: 10 },
+    { name: "Cargo Pants", size: "Large", price: 650, stock: 12 },
+    { name: "Polyester Shirt", size: "Medium", price: 400, stock: 25 },
+    { name: "Denim Jacket", size: "Large", price: 950, stock: 8 },
+    { name: "Jogger Pants", size: "Medium", price: 550, stock: 14 },
+    { name: "Basic Cotton Shirt", size: "Small", price: 250, stock: 30 }
+];
+    
 function saveProducts() {
     localStorage.setItem("products", JSON.stringify(products));
 }
+    if (!savedProducts) {
+    saveProducts();
+    }
 
 function addProduct() {
     let name = document.getElementById("productName").value.trim();
